@@ -1,0 +1,35 @@
+<html>
+    <canvas id="myCanvas" width="500" height="500" style="border:1px solid #000; background-color: dodgerblue;">
+
+    </canvas>
+
+    <script>
+        const MyCanvas = document.getElementById("myCanvas");
+        const MyContext = MyCanvas.getContext("2d");
+
+        const MySquareObject = {
+            Width: 100,
+            Height: 100,
+            PositionX: 0,
+            PositionY: 200,
+            Color: "darkred",
+        };
+
+        function MyGameLoop( ) { 
+            MyContext.clearRect(0,0,500,500);
+
+            MyContext.fillStyle = MySquareObject.Color;
+            MyContext.fillRect(MySquareObject.PositionX, MySquareObject.PositionY, MySquareObject.Width, MySquareObject.Height);
+
+            MySquareObject.PositionX += 1;
+
+            if (MySquareObject.PositionX >= 500) {
+                MySquareObject.PositionX = 0;
+            }
+
+            requestAnimationFrame(MyGameLoop);
+        };
+
+        requestAnimationFrame(MyGameLoop);
+    </script>
+</html>
