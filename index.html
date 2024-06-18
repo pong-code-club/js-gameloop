@@ -1,35 +1,107 @@
 <html>
-    <canvas id="myCanvas" width="500" height="500" style="border:1px solid #000; background-color: dodgerblue;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styled List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        h1 {
+            font-size: 48;
+        }
+        h3 {
+            font-size: 24;
+        }
+        ul > li {
+            font-size: 18;
+            font-weight: 500;
+        }
+        ul > li > ul > li {
+            font-size: 16;
+            font-weight: 400;
+            color: darkslategray;
+        }
+    </style>
+</head>
+<body>
+    <h1>Game Loop!</h1>
+    <h3>Learning Outcomes</h3>
+    <ul>
+        <li>Setting Up A Basic Game Loop</li>
+    </ul>
+    <h3>Building Block Concepts</h3>
+    <ul>
+        <li>Game Loop</li>
+        <li>Conditional Statements</li>
+    </ul>
+    <h3>Topics</h3>
+    <ul>
+        <li>Setting Up A Game Loop
+            <ul>
+                <li>Setting up a basic game loop using the requestAnimationFrame function</li>
+            </ul>
+        </li>
+        <li>Conditional Logic
+            <ul>
+                <li>How to do if/then logic</li>
+            </ul>
+        </li>
+    </ul>
+</body>
+<canvas id="myCanvas" width="500" height="500" style="border:5px solid rgb(199, 238, 238); background-color: rgb(55, 129, 161);">
 
-    </canvas>
+</canvas>
 
-    <script>
-        const MyCanvas = document.getElementById("myCanvas");
-        const MyContext = MyCanvas.getContext("2d");
+<script>
+    const MyCanvas = document.getElementById("myCanvas");
+    const MyContext = MyCanvas.getContext("2d");
 
-        const MySquareObject = {
-            Width: 100,
-            Height: 100,
-            PositionX: 0,
-            PositionY: 200,
-            Color: "darkred",
-        };
+    let MyPositionHorizontal = 0;
 
-        function MyGameLoop( ) { 
-            MyContext.clearRect(0,0,500,500);
+    function MyGameLoop( ) { 
+        MyContext.clearRect(0,0,500,500);
 
-            MyContext.fillStyle = MySquareObject.Color;
-            MyContext.fillRect(MySquareObject.PositionX, MySquareObject.PositionY, MySquareObject.Width, MySquareObject.Height);
+        MyContext.fillStyle = "black";
+        MyContext.fillRect(MyPositionHorizontal - 85, 200, 100, 100);
 
-            MySquareObject.PositionX += 1;
+        MyContext.fillStyle = "white";
+        MyContext.fillRect(MyPositionHorizontal - 85, 210, 100, 10);
 
-            if (MySquareObject.PositionX >= 500) {
-                MySquareObject.PositionX = 0;
-            }
+        MyContext.beginPath();
+        MyContext.moveTo(MyPositionHorizontal + 42, 215);
+        MyContext.lineTo(MyPositionHorizontal + 80, 250);
+        MyContext.lineTo(MyPositionHorizontal + 42, 285);
+        MyContext.closePath();
+        MyContext.fillStyle = "orange";
+        MyContext.fill();
+        MyContext.lineWidth = 10;
+        MyContext.strokeStyle = "white";
+        MyContext.stroke();
 
-            requestAnimationFrame(MyGameLoop);
-        };
+        MyContext.beginPath();
+        MyContext.arc(MyPositionHorizontal, 250, 50, 0, Math.PI * 2);
+        MyContext.fillStyle = "cyan";
+        MyContext.fill();
+        MyContext.lineWidth = 20;
+        MyContext.globalAlpha = 1;
+        MyContext.strokeStyle = "white";
+        MyContext.stroke();
+
+        MyContext.globalAlpha = 1;
+        MyContext.shadowBlur = 25;
+        MyContext.shadowColor = "orange";
+
+        MyPositionHorizontal += 3;
+
+        if (MyPositionHorizontal >= 500) {
+            MyPositionHorizontal = 0;
+        }
 
         requestAnimationFrame(MyGameLoop);
-    </script>
+    };
+
+    requestAnimationFrame(MyGameLoop);
+</script>
 </html>
